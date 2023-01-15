@@ -7,6 +7,8 @@ import (
 	"recipe-lang/pkg/parser"
 )
 
+// TODO: Make this a cli?
+// TODO: Generate a PDF with the parsed contents
 func main() {
 	recipe, err := parser.ParseFromFile("./test.recipe")
 	if err != nil {
