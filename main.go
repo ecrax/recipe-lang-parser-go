@@ -1,9 +1,8 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
+	"recipe-lang/pkg/generator"
 	"recipe-lang/pkg/parser"
 )
 
@@ -14,10 +13,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	//
+	//marshal, err := json.MarshalIndent(recipe, "", " ")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//fmt.Print(string(marshal))
 
-	marshal, err := json.MarshalIndent(recipe, "", " ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Print(string(marshal))
+	out := generator.GenerateHtml(recipe)
+	log.Println(string(out))
 }
