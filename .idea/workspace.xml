@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="946172d1-b7db-4912-90de-5d7735db6531" name="Changes" comment="added duration parser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/generator/html.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/generator/html.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/generator/templates/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/generator/templates/content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/generator/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/generator/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/generator/templates/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/generator/templates/page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +85,7 @@
       <workItem from="1673897813850" duration="2949000" />
       <workItem from="1674054368237" duration="17000" />
       <workItem from="1674057353709" duration="4421000" />
-      <workItem from="1674062422743" duration="1972000" />
+      <workItem from="1674062422743" duration="2298000" />
     </task>
     <task id="LOCAL-00001" summary="added duration parser">
       <created>1673900777047</created>
