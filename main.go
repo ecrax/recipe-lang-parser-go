@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"recipe-lang/internal/util"
 	"recipe-lang/pkg/parser"
 )
 
@@ -21,8 +20,4 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Print(string(marshal))
-
-	//r := util.ParseDuration("2 minutes and 1 hours", "m")
-	r := util.ParseDuration("running length: 1hour:20mins", "m")
-	log.Println(r)
 }

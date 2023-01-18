@@ -5,10 +5,12 @@ type Recipe struct {
 	Ingredients []Ingredient `json:"ingredients,omitempty"`
 	Metadata    Metadata     `json:"metadata,omitempty"`
 	Steps       [][]Step     `json:"steps,omitempty"`
+	Timers      []Timer      `json:"timers,omitempty"`
 	Times       Times        `json:"times"`
 }
 
 type Ingredient = Step
+type Timer = Step
 
 type Metadata = map[string]string
 
@@ -20,7 +22,7 @@ type Step struct {
 }
 
 type Times struct {
-	TotalTime       int `json:"total_time,omitempty"`
-	CookingTime     int `json:"cooking_time,omitempty"`
-	PreparationTime int `json:"preparation_time,omitempty"`
+	TotalTime       float32 `json:"total_time,omitempty"`
+	CookingTime     float32 `json:"cooking_time,omitempty"`
+	PreparationTime float32 `json:"preparation_time,omitempty"`
 }

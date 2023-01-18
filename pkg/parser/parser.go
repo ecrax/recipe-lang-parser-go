@@ -1,7 +1,9 @@
 package parser
 
 import (
+	"math"
 	"os"
+	"recipe-lang/internal/duration"
 	"recipe-lang/internal/util"
 	"regexp"
 	"strings"
@@ -22,6 +24,7 @@ var tokensRegex = regexp.MustCompile(tokens)
 
 func Parse(source string) (Recipe, error) {
 	ingredients := make([]Ingredient, 0)
+	timers := make([]Timer, 0)
 	steps := make([][]Step, 0)
 	metadata := Metadata{}
 	title := ""
@@ -43,7 +46,6 @@ func Parse(source string) (Recipe, error) {
 		matches := util.FindNamedMatches(tokensRegex, line)
 
 		for _, match := range matches {
-			//log.Printf("%v | %s", match.Index, match.Context)
 			groups := match.Group
 
 			if groups["title"] != "" {
@@ -85,12 +87,14 @@ func Parse(source string) (Recipe, error) {
 			}
 
 			if groups["timerQuantity"] != "" {
-				step = append(step, Step{
+				timer := Timer{
 					Quantity: parseQuantity(groups["timerQuantity"]),
 					Name:     groups["timerName"],
 					StepType: "timer",
 					Units:    parseUnits(groups["timerUnits"]),
-				})
+				}
+				step = append(step, timer)
+				timers = append(timers, timer)
 			}
 
 			pos = match.Index + len(match.Context)
@@ -108,17 +112,51 @@ func Parse(source string) (Recipe, error) {
 		if len(step) > 0 {
 			steps = append(steps, step)
 		}
-		//log.Println()
 	}
 
 	// TODO: calculate times
+	var totalTime float32
+	var cookingTime float32
+	var preparationTime float32
+	if metadata["total time"] != "" {
+		totalTime = duration.ParseDuration(metadata["total time"], duration.Minutes)
+	} else {
+		if metadata["preparation time"] != "" {
+			preparationTime = duration.ParseDuration(metadata["preparation time"], duration.Minutes)
+		}
+		if metadata["cooking time"] != "" {
+			cookingTime = duration.ParseDuration(metadata["cooking time"], duration.Minutes)
+		} else {
+			i := 0
+			// Filter for duplicates
+			filteredTimers := util.Filter(timers, func(step Step) bool {
+				x := util.FindIndex(len(timers), func(i int) bool {
+					t := timers[i]
+					return t.Name == step.Name
+				}) == i
+				i++
+
+				return x
+			})
+
+			for _, timer := range filteredTimers {
+				cookingTime += duration.ParseDuration(timer.Quantity+timer.Units, duration.Minutes)
+			}
+		}
+		totalTime = preparationTime + cookingTime
+	}
 
 	return Recipe{
-		Title:       title,
-		Ingredients: ingredients,
-		Metadata:    metadata,
-		Steps:       steps,
-		Times:       Times{},
+		title,
+		ingredients,
+		metadata,
+		steps,
+		timers,
+		Times{
+			totalTime,
+			float32(math.Round(float64(cookingTime*100)) / 100),
+			preparationTime,
+		},
 	}, nil
 }
 
