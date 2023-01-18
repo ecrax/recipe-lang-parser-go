@@ -10,7 +10,7 @@ const tmplPath = "./pkg/generator/templates/"
 
 func GenerateHtml(recipe parser.Recipe) []byte {
 
-	allPaths := []string{tmplPath + "content.tmpl", tmplPath + "header.tmpl", tmplPath + "page.tmpl"}
+	allPaths := []string{tmplPath + "content.html", tmplPath + "header.html", tmplPath + "page.html"}
 
 	templates := template.Must(template.New("").ParseFiles(allPaths...))
 
