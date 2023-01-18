@@ -3,6 +3,7 @@ package generator
 import (
 	"bytes"
 	"html/template"
+	"log"
 	"recipe-lang/pkg/parser"
 )
 
@@ -15,9 +16,9 @@ func GenerateHtml(recipe parser.Recipe) []byte {
 	templates := template.Must(template.New("").ParseFiles(allPaths...))
 
 	var processed bytes.Buffer
-	err := templates.ExecuteTemplate(&processed, "page", recipe.Ingredients)
+	err := templates.ExecuteTemplate(&processed, "page", recipe)
 	if err != nil {
-		return nil
+		log.Fatal(err)
 	}
 
 	return processed.Bytes()

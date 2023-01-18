@@ -1,13 +1,14 @@
+{{- /*gotype: recipe-lang/pkg/parser.Recipe*/ -}}
 {{define "content" -}}
     <div class="container">
-        <h3 class="title"> organic products </h3>
-        <div class="products-container">
-            {{range $index, $item :=.}}
-                <div class="product" data-name="p-{{$index}}">
-                    <span>TeST </span>
-                </div>
+        <h3 class="title"> {{.Title}} </h3>
+        <ul class="ingredients">
+            {{range $index, $item :=.Ingredients}}
+                <li class="product" data-name="p-{{$index}}">
+                    <span>{{$item.Quantity}} {{$item.Units}} {{$item.Name}}</span>
+                </li>
             {{end}}
-        </div>
+        </ul>
     </div>
 
 {{end}}
