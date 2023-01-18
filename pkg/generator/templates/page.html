@@ -1,5 +1,10 @@
 {{- /*gotype: recipe-lang/pkg/parser.Recipe*/ -}}
 {{define "page"}}
-{{template "header" -}}
-{{template "content" . -}}
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header" -}}
+    <body>
+    {{template "content" . -}}
+    </body>
+    </html>
 {{end}}

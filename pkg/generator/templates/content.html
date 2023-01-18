@@ -1,14 +1,13 @@
 {{define "content" -}}
-<div class="container">
-   <h3 class="title"> organic products </h3>
-   <div class="products-container">
-{{range $index, $item :=.}}
-      <div class="product" data-name="p-{{$index}}">
-            <span>TeST </span>
-      </div>
-{{end}}
-   </div>
-</div>
-</body>
-</html>
+    <div class="container">
+        <h3 class="title"> organic products </h3>
+        <div class="products-container">
+            {{range $index, $item :=.}}
+                <div class="product" data-name="p-{{$index}}">
+                    <span>TeST </span>
+                </div>
+            {{end}}
+        </div>
+    </div>
+
 {{end}}
