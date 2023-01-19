@@ -1,14 +1,25 @@
 {{- /*gotype: recipe-lang/pkg/parser.Recipe*/ -}}
 {{define "content" -}}
     <div class="container">
-        <h3 class="title"> {{.Title}} </h3>
+        <h1> {{.Title}} </h1>
+        {{range $k, $v :=.Metadata}}
+            <span class="metadata" data-name="m-{{$k}}">
+              {{$k}}: {{$v}}
+            </span><br>
+        {{end}}
+        <h3>Durations</h3>
+        <span>Total Time: {{.Times.TotalTime}}</span><br>
+        <span>Preparation Time: {{.Times.PreparationTime}}</span><br>
+        <span>Cooking Time: {{.Times.CookingTime}}</span><br>
+        <h3>Ingredients</h3>
         <ul class="ingredients">
             {{range $index, $item :=.Ingredients}}
-                <li class="product" data-name="p-{{$index}}">
+                <li class="product" data-name="i-{{$index}}">
                     <span>{{$item.Quantity}} {{$item.Units}} {{$item.Name}}</span>
                 </li>
             {{end}}
         </ul>
+        <h3></h3>
     </div>
 
 {{end}}
